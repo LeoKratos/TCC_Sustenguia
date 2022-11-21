@@ -3,45 +3,58 @@ import 'TelaInicial.dart';
 import 'TelaCategorias.dart';
 
 class TelaLogin extends StatelessWidget {
-  const TelaLogin({Key? key}) : super(key: key);
+  TelaLogin({Key? key}) : super(key: key);
+
+  final _ChaveForm = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
+        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Form(
+        key: _ChaveForm,
+        child: ListView(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           children: [
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'CPF:',
-                ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'CPF:',
+              ),
+              keyboardType: TextInputType.number,
+              validator: (text){
+                if (text!.isEmpty)
+                  return "CPF Inválido!";
+              },
+            ),
+            SizedBox(height: 10,),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Senha:',
+              ),
+              obscureText: true,
+              validator: (text){
+                if (text!.isEmpty || text.length < 8)
+                  return "Senha Inválida!";
+              },
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: (){},
+                child: Text("Esqueci minha Senha",
+                textAlign: TextAlign.right,),
+                style: TextButton.styleFrom(foregroundColor: Colors.black, padding: EdgeInsets.zero),
               ),
             ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Senha:',
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
+            SizedBox(height: 50,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(),
               child: const Text('Entrar'),
               onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Categorias()));
+                if(_ChaveForm.currentState!.validate()){}
               },
             ),
             SizedBox(height: 20,),

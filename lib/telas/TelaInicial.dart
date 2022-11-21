@@ -15,12 +15,15 @@ class TelaInicial extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image(image: AssetImage('assets/images/mage.png'),
+            height: 300,),
+            SizedBox(height: 30,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(),
               child: const Text('Login'),
               onPressed: () {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const TelaLogin()));
+                    MaterialPageRoute(builder: (context) => TelaLogin()));
               },
             ),
             const SizedBox(
