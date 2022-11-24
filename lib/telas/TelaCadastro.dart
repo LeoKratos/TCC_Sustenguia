@@ -1,71 +1,101 @@
 import 'package:flutter/material.dart';
 import'TelaCategorias.dart';
 import 'TelaInicial.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TelaCadastro extends StatelessWidget {
-  const TelaCadastro({Key? key}) : super(key: key);
+  TelaCadastro({Key? key}) : super(key: key);
+
+  final _cpfControle = TextEditingController();
+  final _nomeControle = TextEditingController();
+  final _emailControle = TextEditingController();
+  final _telefoneControle = TextEditingController();
+  final _senhaControle = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
+
+  final _ChaveForm = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastro'),
+        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Form(
+        key: _ChaveForm,
+        child: ListView(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           children: [
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'CPF:',
-                ),
+            TextFormField(
+              controller: _cpfControle,
+              decoration: InputDecoration(
+                hintText: 'CPF:',
               ),
+              keyboardType: TextInputType.number,
+              validator: (text){
+                if (text!.isEmpty ||  text.length < 11)
+                  return "CPF Inválido!";
+              },
             ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Nome Completo:',
-                ),
+            SizedBox(height: 10,),
+            TextFormField(
+              controller: _nomeControle,
+              decoration: InputDecoration(
+                hintText: 'Nome Completo:',
               ),
+              validator: (text){
+                if (text!.isEmpty)
+                  return "Nome Inválido";
+              },
             ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'E-mail:',
-                ),
+            SizedBox(height: 10,),
+            TextFormField(
+              controller: _emailControle,
+              decoration: InputDecoration(
+                hintText: 'E-mail',
               ),
+              keyboardType: TextInputType.emailAddress,
+              validator: (text){
+                if (text!.isEmpty || !text.contains("@"))
+                  return "Email Inválido";
+              },
             ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Telefone:',
-                ),
+            SizedBox(height: 10,),
+            TextFormField(
+              controller: _telefoneControle,
+              decoration: InputDecoration(
+                hintText: 'Telefone',
               ),
+              keyboardType: TextInputType.phone,
+              validator: (text){
+                if (text!.isEmpty)
+                  return "Telefone Inválido";
+              },
             ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Senha:',
-                ),
+            SizedBox(height: 10,),
+            TextFormField(
+              controller: _senhaControle,
+              decoration: InputDecoration(
+                hintText: 'Senha',
               ),
+              obscureText: true,
+              validator: (text){
+                if (text!.isEmpty)
+                  return "Senha Inválida!";
+              },
             ),
-            SizedBox(
-              height: 50,
-            ),
+            SizedBox(height: 50,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(),
-              child: const Text('Realizar Cadastro'),
+              child: const Text('Entrar'),
               onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Categorias()));
+                if(_ChaveForm.currentState!.validate()){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TelaCategorias()));
+                }
               },
             ),
             SizedBox(height: 20,),
@@ -82,6 +112,16 @@ class TelaCadastro extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  Cadastro() async {
+    _firebaseAuth.createUserWithEmailAndPassword(
+        email: _emailControle.text,
+        password: _senhaControle.text,
+    ).then((UserCredential userCredential) {
+      userCredential.user!.updateDisplayName(_nomeControle.text);
+    }
+
     );
   }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "592323195625",
+    "firebase_url": "https://sustenguia-default-rtdb.firebaseio.com",
+    "project_id": "sustenguia",
+    "storage_bucket": "sustenguia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592323195625:android:015ee0486c5a8954da3678",
+        "android_client_info": {
+          "package_name": "com.example.servicos_mage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592323195625-dtmtclsqhco88bb5b8273nd3b5n9q66a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXa8gfXUGW4Eqpnr6ngkHzcI3XXmricxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592323195625-dtmtclsqhco88bb5b8273nd3b5n9q66a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

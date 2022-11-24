@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'Iluminacao.dart';
 import 'TelaServicos.dart';
+import 'Ambiente.dart';
+import 'Saneamento.dart';
 
-class Categorias extends StatelessWidget {
-  const Categorias({Key? key}) : super(key: key);
+class TelaCategorias extends StatelessWidget {
+  const TelaCategorias({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categorias'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -19,7 +23,7 @@ class Categorias extends StatelessWidget {
                 title: Text('Iluminação Pública'),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Servicos()));
+                      MaterialPageRoute(builder: (context) => Iluminacao()));
                 },
               ),
             ),
@@ -28,7 +32,7 @@ class Categorias extends StatelessWidget {
                 title: Text('Meio Ambiente'),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Servicos()));
+                      MaterialPageRoute(builder: (context) => Ambiente()));
                 },
               ),
             ),
@@ -37,7 +41,7 @@ class Categorias extends StatelessWidget {
                 title: Text('Saneamento Básico'),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Servicos()));
+                      MaterialPageRoute(builder: (context) => Saneamento()));
                 },
               ),
             ),

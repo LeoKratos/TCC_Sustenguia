@@ -10,6 +10,7 @@ class TelaInicial extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Início'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -36,7 +37,7 @@ class TelaInicial extends StatelessWidget {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const TelaCadastro()));
+                        builder: (context) => TelaCadastro()));
               },
             ),
           ],

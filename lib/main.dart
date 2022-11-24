@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:servicos_mage/modelos/ModeloUsuario.dart';
 import 'package:servicos_mage/telas/TelaInicial.dart';
-import 'package:servicos_mage/telas/TelaLogin.dart';
+import 'package:servicos_mage/telas/TelaCadastro.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 
 void main() {
@@ -12,7 +14,12 @@ class Programa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: TelaInicial());
+    return ScopedModel<ModeloUsuario>(
+      model: ModeloUsuario(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: TelaInicial(),
+      ),
+    );
   }
 }
-
